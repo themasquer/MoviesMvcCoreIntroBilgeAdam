@@ -1,0 +1,49 @@
+﻿@model MovieModel
+
+@{
+    string title = "Movie Details";
+    ViewData["Title"] = title;
+}
+
+<h2>@title</h2>
+<hr />
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.Name)
+    </dt>
+    <dd class="col-10">
+        @*@Model.Name*@
+        @Html.DisplayFor(m => m.Name)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.ProductionYear)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(m => m.ProductionYear)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.BoxOfficeReturnModel)
+    </dt>
+    <dd class="col-10">
+        $@Html.DisplayFor(m => m.BoxOfficeReturnModel)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.ReviewCountModel)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(m => m.ReviewCountModel)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.ReviewAverageModel)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(m => m.ReviewAverageModel)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(m => m.DirectorsModel)
+    </dt>
+    <dd class="col-10">
+        @Html.Raw(Model.DirectorsModel) @* DirectorsModel içerisinde HTML verisi olduğu için Raw() kullanılmalı *@
+    </dd>
+</dl>
+@Html.ActionLink("Back to Movie List", "Index", "Movies")

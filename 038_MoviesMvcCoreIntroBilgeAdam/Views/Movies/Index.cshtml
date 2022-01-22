@@ -1,0 +1,94 @@
+﻿@*@model List<MovieModel>*@
+@model IEnumerable<MovieModel> 
+@* DisplayName ile model özelliklerinin kullanımı için IEnumerable kullanılmalıdır. *@
+
+@{
+    //ViewData["Title"] = "Movie List"; @* ViewBag.Title ile ViewData["Title"] aynıdır ve birbirlerinin yerine kullanılabilir, sadece yazımları farklıdır. *@
+    ViewBag.Title = "Movie List"; @* _Layout.cshtml'de head tag'inin içerisindeki title tag'inde kullanılıyor sayfa başlığı için. *@
+}
+
+@*<h2>Movie List</h2>*@ @* Statik olarak Movie List yazmak yerine ViewBag.Title'da set edilen de kullanılabilir. *@
+<h2>@ViewData["Title"]</h2>
+
+@*<a href="/Movies/Create">Create New Movie</a>*@
+@Html.ActionLink("Create New Movie", "Create", "Movies")
+
+@if (TempData["Message"] != null)
+{
+    <br />
+    <span class="bg-warning text-black">
+        @TempData["Message"]
+    </span>
+}
+
+<br />
+<table class="table">
+    <thead>
+        <th>
+            @*Name*@ @* Statik olarak Name yazdırmak yerine MovieModel'deki Name'in DisplayName'i kullanılması daha uygundur. *@
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductionYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BoxOfficeReturnModel)
+        </th>
+        <th>
+
+        </th>
+    </thead>
+    <tbody>
+        @foreach (MovieModel movie in Model) @* View'ın kullandığı model tanımı @model ile yapılır, view'a gelen model objesi ise Model olarak kullanılır. *@
+        {
+            <tr>
+                <td>
+                    @*@movie.Name*@ @* @movie.Name ile film adı yazdırılabileceği gibi DisplayFor HTML Helper'ı da kullanılabilir. *@
+                    @Html.DisplayFor(model => movie.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => movie.ProductionYear)
+                </td>
+                <td>
+                    $@Html.DisplayFor(model => movie.BoxOfficeReturnModel)
+                </td>
+                <td>
+                    @*<a href="/Movies/Details/@movie.Id">Details</a>*@
+                    @Html.ActionLink("Details", "Details", "Movies", new { id = @movie.Id }) @* id Details aksiyonuna gönderilen parametre *@
+                    &nbsp;|&nbsp;
+                    @Html.ActionLink("Edit", "Edit", "Movies", new { id = @movie.Id })
+                    &nbsp;|&nbsp;
+                    @Html.ActionLink("Delete", "Delete", "Movies", new { id = @movie.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*
+    ASP.NET Core MVC'deki Genel Kullanılan HTML Helper'lar:
+    Html.TextBox
+    Html.TextBoxFor
+    Html.Password
+    Html.PasswordFor
+    Html.TextArea
+    Html.TextAreaFor
+    Html.CheckBox
+    Html.CheckBoxFor
+    Html.RadioButton
+    Html.RadioButtonFor
+    Html.DropDownList
+    Html.DropDownListFor
+    Html.ListBox
+    Html.ListBoxFor
+    Html.Hidden
+    Html.HiddenFor
+    Html.Editor
+    Html.EditorFor
+    Html.Display
+    Html.DisplayFor
+    Html.Label
+    Html.LabelFor
+    Html.ActionLink
+    Html.BeginForm
+*@

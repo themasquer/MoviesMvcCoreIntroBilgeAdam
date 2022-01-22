@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Basic Bootstrap</title>
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+        .myjumbotron {
+            /* Eğer sayfa bu stil özelliğini uygulayamıyorsa important kullanıyoruz. */
+            background-color: black !important;
+
+            /* Eğer sayfa bu stil özelliğini uygulayamıyorsa important kullanıyoruz. */
+            color: yellow !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <b>Adı</b>
+            </div>
+            <div class="col-md-4">
+                <b>Kurum</b>
+            </div>
+            <div class="col-md-4">
+                <b>Ünvan</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                Çağıl Alsaç
+            </div>
+            <div class="col-md-4">
+                Bilge Adam
+            </div>
+            <div class="col-md-4">
+                Yazılım Geliştirme Eğitmeni
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-4">
+                <b>Adı</b>
+            </div>
+            <div class="col-4">
+                <b>Kurum</b>
+            </div>
+            <div class="col-4">
+                <b>Ünvan</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                Çağıl Alsaç
+            </div>
+            <div class="col-4">
+                Bilge Adam
+            </div>
+            <div class="col-4">
+                Yazılım Geliştirme Eğitmeni
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="text-primary">Primary label</label>
+                <br />
+                <button class="btn btn-info">Info button</button>
+                <br />
+                <a href="http://www.angeleo.net" target="_blank" class="btn btn-warning">
+                    Warning link
+                </a>
+                <br />
+                <span class="text-success">Success span</span>
+                <br />
+                <input type="button" class="btn btn-danger" value="Danger button" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <form>
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                    </div>
+                    <div class="form-check mb-3">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    &nbsp;
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                </form>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="mt-4 p-5 bg-primary text-white rounded" style="background-color: black !important; color: yellow !important;">This is a jumbotron.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <p class="mt-4 p-5 bg-primary text-white rounded myjumbotron">This is another jumbotron.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

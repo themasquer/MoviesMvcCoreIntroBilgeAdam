@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Basic Javascript</title>
+    <script type="text/javascript">
+        var isim = "Çağıl Alsaç";
+        //alert(isim);
+        console.log(isim);
+
+        topla(10, 7);
+
+        var carpim = carp(5, 6);
+        console.log(carpim);
+
+        function topla(no1, no2) {
+            //alert("Toplam: " + (no1 + no2));
+            console.log("Toplam: " + (no1 + no2));
+        }
+        function carp(no1, no2) {
+            return no1 * no2;
+        }
+    </script>
+    <script>
+        var sayi1 = 1;
+        var sayi2 = 2;
+        var ikiSayidanHangisiBuyukSonucu = ikiSayidanHangisiBuyuk(sayi1, sayi2);
+        if (ikiSayidanHangisiBuyukSonucu == null) {
+            //alert("İki sayı birbirine eşit.");
+            console.log("İki sayı birbirine eşit.");
+        }
+        else {
+            //alert(ikiSayidanHangisiBuyukSonucu + " daha büyük.");
+            console.log(ikiSayidanHangisiBuyukSonucu + " daha büyük.");
+        }
+
+        function ikiSayidanHangisiBuyuk(no1, no2) {
+            //if (no1 !== no2) {
+            if (no1 != no2) {
+                if (no1 > no2) {
+                    return no1;
+                }
+                else if (no2 > no1) {
+                    return no2;
+                }
+            }
+            //else if (no1 === no2) { // === ve !== hem veri değerlerine hem de veri tiplerine bakar
+            //    return null;
+            //}
+            //else if (no1 == no2) { // == ve != sadece veri değerlerine bakar
+            //    return null;
+            //}
+            else {
+                return null;
+            }
+        }
+    </script>
+    <script src="04_BasicJavascript.js"></script>
+</head>
+<body onload="onLoadIleMyTextAreaDoldur('*', 5);">
+    <textarea id="mytextareaid" name="mytextareaname" rows="10" cols="50"></textarea>
+    <br />
+    <button id="bUcgenDoldur" onclick="onClickIleMyTextAreaDoldur('*', 5);">
+        Üçgeni Tersine Çevir
+    </button>
+    <hr />
+    <label>Karakter:</label>&nbsp;<input type="text" id="karakter" value="*" />
+    <br />
+    <select id="satirsayisi">
+        <option value="2">2 satır</option>
+        <option value="3">3 satır</option>
+        <option value="4">4 satır</option>
+        <option value="5" selected>5 satır</option>
+    </select>
+    <br />
+    Tersten&nbsp;<input type="checkbox" id="tersten" />
+    <br />
+    <textarea id="sonuc" rows="10" cols="50"></textarea>
+    <br />
+    <button id="ucgendoldur" onclick="inputlaraGoreUcgenDoldur();">
+        Üçgen Doldur
+    </button>
+    <br />
+    <label id="bilgi"></label>
+    <hr />
+    <button onclick="bilgisayarOlusturVeGetir();">Bilgisayar Objesi Oluştur ve Getir</button>
+    <p id="bilgisayar"></p>
+    <script src="04_JsClasses.js"></script>
+    <hr />
+    <a href="04_JsHesapMakinesi.html" target="_blank">Hesap Makinesi</a>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hesap Makinesi</title>
+    <style>
+        button {
+            width: 50px;
+            height: 50px;
+            font-family: Verdana;
+            font-size: 20px;
+        }
+
+        td {
+            /*padding: 20px;*/
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .tbinput {
+            width: 94%;
+            font-family: 'Trebuchet MS';
+            font-size: 20px;
+        }
+
+        #tHesapMakinesi {
+            border-style: groove;
+            border-width: 5px;
+            background-color: gainsboro;
+        }
+
+        .buttonesit {
+            background-color: #f1eb81;
+        }
+
+        .buttonislem {
+            background-color: #e8c1c1;
+        }
+
+        .buttoneksi {
+            font-size: 12px;
+            background-color: #adffaa;
+        }
+    </style>
+</head>
+<body>
+    <table id="tHesapMakinesi">
+        <tr>
+            <td colspan="3">
+                <input type="text" id="tbInput" class="tbinput" readonly value="0" />
+            </td>
+            <td>
+                <button onclick="reset();" style="background-color: #bed0fc;">C</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="setTbInput('7');">7</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('8');">8</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('9');">9</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('+');" class="buttonislem">+</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="setTbInput('4');">4</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('5');">5</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('6');">6</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('-');" class="buttonislem">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="setTbInput('1');">1</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('2');">2</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('3');">3</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('*');" class="buttonislem">*</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="setTbInput('~');" class="buttonislem buttoneksi">~ (Eksi)</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('0');">0</button>
+            </td>
+            <td>
+                <button onclick="calculate();" class="buttonesit">=</button>
+            </td>
+            <td>
+                <button onclick="setTbInput('/');" class="buttonislem">/</button>
+            </td>
+        </tr>
+    </table>
+    <script>
+        var no1 = ""; // tıklanan 1. sayı değerini tutar
+        var no2 = ""; // tıklanan 2. sayı değerini tutar
+        var operator = ""; // tıklanan işlemi tutar
+        var no = ""; // bir sayıya tek tıklandığında veya arka arkaya tıklandığında sayının son değerini tutar
+
+        // her butona tıklandığında yukarıdaki no veya operator değişken değerlerini textbox'a yazar ve no1 değerini oluşturur
+        function setTbInput(input) {
+            // eğer kullanıcı herhangi bir işlem butonuna tıklarsa
+            if (input == "+" || input == "-" || input == "*" || input == "/") {
+                if (operator == "" || operator == input) { // eğer operator boşsa ilk işlem demektir, boş değilse başka işlemler üzerinden değiştirilememelidir
+                    if (operator == input) { // eğer daha önce girilen işlemle aynı işlem tıklanırsa hesaplama yapılır, farklı işlem tıklanırsa 1. sayı ve operator atanır
+                        calculate();
+                    }
+                    else {
+                        if (no == "~") { // eğer kullanıcı sadece ~ girdiyse sayı girmemiş demektir
+                            no = "0"; // no'yu 0 yap
+                        }
+                        no1 = no; // no değişkenindeki sayının son halini 1. sayıya ata
+                        no = ""; // 2. sayı girişi için no değeri temizlenir
+                        operator = input;
+                        document.getElementById("tbInput").value = operator; // işlemi yazdır
+                    }
+                }
+            }
+            else if (input == "~") { // eğer kullanıcı eksi butonuna tıkladıysa
+                if (no.includes("~")) { // eğer kullanıcının girdiği sayı negatif bir sayıysa
+                    no = no.replace("~", ""); // negatif sayıyı pozitif sayıya dönüştür
+                }
+                else { // eğer kullanıcının girdiği sayı pozitif bir sayıysa
+                    no = "~" + no; // pozitif sayıyı negatif sayıya dönüştür
+                };
+                document.getElementById("tbInput").value = no;
+            }
+            else {
+                no += input; // kullanıcının tıkladığı buton sayıları no değişkenine eklenir
+                document.getElementById("tbInput").value = no;
+            }
+        }
+
+        // kullanıcı ='e tıklayınca yukarıda oluşturulan no1 ve operator üzerinden no2 değerini atayarak hesaplama işlemini gerçekleştirir
+        function calculate() {
+            if (no != "" && no1 != "" && operator != "") { // işlem yapmak için no, no1 ve operator değişkenlerine değer atanmışsa
+                no2 = no; // kullancının işlemden sonra tıkladığı buton sayılarının son hali
+                let hesapMakinesi = new HesapMakinesi(no1.replace("~", "-"), no2.replace("~", "-"), operator); // işlem yapabilmek için eksileri işaret olarak ~'dan -'ye dönüştürüyoruz
+
+                // no bir sonraki işlemin 1. sayısı olabileceğinden hesapla sonucunda atanır
+                no = hesapMakinesi.hesapla();
+
+                document.getElementById("tbInput").value = no;
+
+                if (no < 0) { // eğer sonuç negatif ise
+                    document.getElementById("tbInput").value = document.getElementById("tbInput").value.replace("-", "~"); // negatif sayıları ~ ile yazdırıyoruz
+                }
+
+                // no2 ve operator temizlenir ki kullanıcı tekrar yeni bir işlem üzerinden 2. sayıyı girebilsin
+                no2 = "";
+                operator = "";
+            }
+        }
+
+        function reset() {
+            no1 = "";
+            no2 = "";
+            operator = "";
+            no = "";
+            document.getElementById("tbInput").value = "0";
+        }
+
+        class HesapMakinesi {
+            constructor(sayi1, sayi2, islem) {
+                this._sayi1 = parseFloat(sayi1);
+                this._sayi2 = parseFloat(sayi2);
+                this._islem = islem;
+                this._sonuc = "0";
+            }
+
+            hesapla() {
+                switch (this._islem) {
+                    case "+": this._sonuc = this._sayi1 + this._sayi2;
+                        break;
+                    case "-": this._sonuc = this._sayi1 - this._sayi2;
+                        break;
+                    case "*": this._sonuc = this._sayi1 * this._sayi2;
+                        break;
+                    default: this._sonuc = this._sayi1 / this._sayi2;
+                        break;
+                }
+                return this._sonuc.toString();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+﻿@model string
+
+@{
+    string message = string.IsNullOrWhiteSpace(Model) ? "An error occurred." : Model;
+}
+
+<h2 class="text-danger">Error!</h2>
+<p class="text-danger">@message</p>

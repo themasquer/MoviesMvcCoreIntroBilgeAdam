@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Basic jQuery</title>
+
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="05_BasicJquery.js"></script>
+
+    <script>
+        //$(function () {
+        //    alert("Document loaded.");
+        //    console.log("Document loaded.");
+        //});
+        $(document).ready(function () {
+            //alert("Document loaded.");
+            console.log("Document loaded.");
+            $("button").click(function () {
+                $("p").hide();
+                //$("p").show();
+            });
+            $("#myaid").click(function (event) {
+                event.preventDefault();
+                //$("#mylabelid").toggle("slow");
+                //$("#mylabelid").toggle("fast");
+                $("#mylabelid").toggle(1000);
+            });
+            $("#bSave").click(function () {
+                var adi = $("#tbAdi").val();
+                var soyadi = $("#tbSoyadi").val();
+                var no = $("#tbNo").val();
+                var lSaveResult = $("#lSaveResult");
+                //if (adi.trim() == "" || soyadi.trim() == "" || no.trim() == "") {
+                //    lSaveResult.text("Öğrenci adı, soyadı ve numarası boş olamaz!");
+                //}
+                //else {
+                //    lSaveResult.text("Adı: " + adi.trim() + ", soyadı: " + soyadi.trim() +
+                //        ", numarası: " + no.trim() + " olan öğrenci kaydedildi.");
+                //}
+                var emptyFound = false;
+                $(".myinputclass").each(function () {
+                    if ($(this).val().trim() == "") {
+                        emptyFound = true;
+                    }
+                });
+                if (emptyFound) {
+                    lSaveResult.text("Öğrenci adı, soyadı ve numarası boş olamaz!");
+                    lSaveResult.css("color", "red");
+                }
+                else {
+                    lSaveResult.text("Adı: " + adi.trim() + ", soyadı: " + soyadi.trim() +
+                        ", numarası: " + no.trim() + " olan öğrenci kaydedildi.");
+                    lSaveResult.css("color", "green").slideUp(1000).slideDown(1000);
+                }
+            });
+            $("#lDdlSehir").html("<b>Şehir seçiniz.</b>");
+            $("#ddlSehir").change(function () {
+                if ($("#ddlSehir").val() === "") {
+                    $("#lDdlSehir").html("<b>Şehir seçiniz.</b>");
+                }
+                else {
+                    $("#lDdlSehir").html("Seçili değer: " + $("#ddlSehir").val());
+                }
+            });
+            $("#cbMutlu").prop("checked", true);
+            $("#sMutlu").text(":)");
+            $("#cbMutlu").change(function () {
+                if ($("#cbMutlu").prop("checked") == true) {
+                    $("#sMutlu").text(":)");
+                }
+                else {
+                    $("#sMutlu").text(":(");
+                }
+            });
+            $("#rAnkara").prop("checked", true);
+            $("#rIstanbul").prop("checked", false);
+            $("#rIzmir").prop("checked", false);
+            $("#pRblSehirler").text("Seçili değer: " + $('input[name=rblSehirler]:checked').val());
+            $("input[name=rblSehirler]").off('click'); // parantez içinde belirtilen event'i HTML elemanından kaldırır
+            //$('input[name=rblSehirler]').click (function() {
+            $('input[name=rblSehirler]').on('click', function () {
+                $("#pRblSehirler").text("Seçili değer: " + $('input[name=rblSehirler]:checked').val());
+            });
+            $('#lbSehirler').on("change", function () {
+                var seciliSehirler = seciliSehirleriGetir($(this));
+                $("#sLbSeciliSehirler").text(seciliSehirler);
+            });
+            $("#bSeciliSehirleriTemizle").click(function () {
+                seciliSehirleriTemizle();
+            });
+            $("#bSeciliSehirleriGetir").click(function () {
+                var seciliSehirler = seciliSehirleriGetir();
+                $("#sLbSeciliSehirler").text(seciliSehirler);
+            });
+        });
+        function seciliSehirleriTemizle() {
+            $("#lbSehirler").find("option").prop("selected", false);
+            $("#sLbSeciliSehirler").text("");
+        }
+        function seciliSehirleriGetir(lbSehirler = null) {
+            var sehirler = "";
+            var seciliSehirler;
+            if (lbSehirler != null) {
+                seciliSehirler = lbSehirler.val();
+            } else {
+                seciliSehirler = $("#lbSehirler").val();
+            }
+            if (seciliSehirler.length > 0) {
+                var i = 0;
+                while (i < seciliSehirler.length) {
+                    sehirler += seciliSehirler[i] + ", ";
+                    i++;
+                }
+                sehirler = sehirler.substr(0, sehirler.length - 2);
+            }
+            return sehirler;
+        }
+    </script>
+</head>
+<body>
+    <p>jQuery</p>
+    <button>Hide jQuery</button>
+    <hr />
+    <label id="mylabelid">Oley, hafta sonu geldi!</label>
+    <br />
+    <a id="myaid" href="">Yukarıdaki yazıyı göster / gizle</a>
+    <!--
+        a tag'inin default yaptığı yönlendirme işleminin iptal edilmesi için
+        bu a tag'i ile ilgili click fonksiyonuna event parametresi gönderilip
+        event.preventDefault(); çağrılmalıdır.
+        Ya da href="#" ile event parametresi gönderilmeden fonksiyon çalıştırılabilir.
+    -->
+    <!--<a id="myaid" href="#">Yukarıdaki yazıyı göster / gizle</a>-->
+    <hr />
+    <!--<table border="1">-->
+    <table style="border-style: solid; border-width: 1px;">
+        <tr>
+            <td>
+                Öğrenci Adı:
+            </td>
+            <td>
+                <input type="text" id="tbAdi" class="myinputclass" width="250" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Öğrenci Soyadı:
+            </td>
+            <td>
+                <input type="text" id="tbSoyadi" class="myinputclass" width="250" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Öğrenci No:
+            </td>
+            <td>
+                <input type="text" id="tbNo" class="myinputclass" width="250" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" id="bSave" value="Kaydet" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label id="lSaveResult"></label>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <select id="ddlSehir">
+        <option value="" selected>-- Seçiniz --</option>
+        <option value="6">Ankara</option>
+        <option value="34">İstanbul</option>
+        <option value="35">İzmir</option>
+    </select>
+    <br />
+    <label id="lDdlSehir"></label>
+    <hr />
+    <input type="checkbox" id="cbMutlu" />&nbsp;Mutlu musun?
+    <br />
+    <span id="sMutlu"></span>
+    <hr />
+    <input type="radio" id="rAnkara" name="rblSehirler" value="6" /> Ankara
+    &nbsp;
+    <input type="radio" id="rIstanbul" name="rblSehirler" value="34" /> İstanbul
+    &nbsp;
+    <input type="radio" id="rIzmir" name="rblSehirler" value="35" /> İzmir
+    <br />
+    <p id="pRblSehirler"></p>
+    <hr />
+    <select id="lbSehirler" multiple>
+        <option value="6">Ankara</option>
+        <option value="34">İstanbul</option>
+        <option value="35">İzmir</option>
+    </select>
+    <br />
+    <input type="button" id="bSeciliSehirleriTemizle" value="Seçili Şehirleri Temizle" />
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" id="bSeciliSehirleriGetir" value="Seçili Şehirleri Getir" />
+    <br />
+    <span id="sLbSeciliSehirler"></span>
+    <hr />
+    <!-- jQuery kodları 05_BasicJquery.js dosyasındadır. -->
+    <input type="text" id="tbInput1" placeholder="Enter a text to set below..." />
+    <br />
+    <input type="button" id="bSetText" value="Set Text" />&nbsp;
+    <input type="button" id="bSetHTML" value="Set HTML" />&nbsp;
+    <input type="button" id="bSetValue" value="Set Value" />
+    <br />
+    <span id="sOutput1"></span>
+    <br />
+    <span id="sOutput2"></span>
+    <br />
+    <input type="text" id="tbOutput1" value="" />
+</body>
+</html>

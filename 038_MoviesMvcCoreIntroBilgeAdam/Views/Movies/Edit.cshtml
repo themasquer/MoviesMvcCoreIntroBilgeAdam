@@ -1,0 +1,72 @@
+﻿@*@model _036_MoviesMvcBilgeAdam.Entities.Movie*@
+@model MovieModel 
+@* Scaffolding'i entity üzerinden yapıyoruz, view'larda model kullanıyoruz. *@
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+
+        @* Form tag helper'ı default olarak post methodunu kullanır. *@
+        @*<form asp-controller="Movies" asp-action="Edit" method="post">*@
+        <form asp-action="Edit">@* Eğer geldiği controller içindeki bir action'a veriler gönderilecekse controller yazmaya gerek yoktur. *@
+
+            <div asp-validation-summary="All" class="text-danger"></div>@* Tüm validasyon hatalarını görmek için All kullanılmalı. *@
+            <input type="hidden" asp-for="Id" />@* Güncelleme işlemi yapacağımızdan Id'yi mutlaka hidden olarak tanımlayıp model ile post aksiyonuna göndermeliyiz. *@
+            <div class="row mb-3">
+                <label asp-for="Name" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Name" class="form-control" />@* type belirtilmezse tanımlanan model özelliğinin veri tipine göre input oluşturur. *@
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="ProductionYear" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="ProductionYear" class="form-control" />
+
+					@*<span asp-validation-for="ProductionYear" class="text-danger"></span>*@
+                    @* Edit post action'ında ProductionYear için model üzerinden hiç bir validation yapmayacağımızdan yazmaya gerek yoktur. *@
+
+				</div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="BoxOfficeReturnModel" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="BoxOfficeReturnModel" class="form-control" />
+
+					@*<span asp-validation-for="BoxOfficeReturnModel" class="text-danger"></span>*@
+                    @* Edit post action'ında BoxOfficeReturnModel için model üzerinden hiç bir validation yapmayacağımızdan yazmaya gerek yoktur. *@
+
+				</div>
+            </div>
+
+            <div class="row mb-3">
+                <label asp-for="DirectorIds" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="DirectorIds" asp-items="ViewBag.Directors" class="form-control" multiple></select>
+				</div>
+            </div>
+
+            <div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+
+                    @*<a asp-action="Index" asp-controller="Movies">Back to Movie List</a>*@
+					<a asp-action="Index">Back to Movie List</a>@* Eğer geldiği controller içindeki bir action'a yönlendirilecekse controller yazmaya gerek yoktur. *@
+
+				</div>
+            </div>
+        </form>
+    </div>
+</div>
+

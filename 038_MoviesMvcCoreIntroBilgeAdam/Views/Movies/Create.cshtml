@@ -1,0 +1,98 @@
+﻿@model MovieModel
+
+@{
+    ViewData["Title"] = "Create New Movie";
+}
+
+<h2>Create New Movie</h2>
+<hr />
+<h4>Movie</h4>
+<hr />
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p class="text-danger">
+        @ViewBag.ErrorMessage
+    </p>
+}
+
+<!-- form 1. method: get (default), query string ile adres üzerinden verilerin gönderilmesini sağlar. -->
+<!-- form 2. method: post, verilerin gizli olarak gönderilmesini sağlar. -->
+<!-- action: form'daki verilerin hangi adrese gönderileceğini belirtir. -->
+
+@*<form method="post" action="/Movies/Create">*@
+@using (Html.BeginForm("Create", "Movies", FormMethod.Post)) @* Eğer method belirtilmezse default post'tur. MoviesController'dan bu view dönüldüğü için controller parametresini yazmaya gerek yoktur. *@
+{ @* using ile form'un açılış ve kapanış tag'lerinin süslü parantezlere göre oluşturulması sağlanır. *@
+
+    @Html.ValidationSummary(false, null, new { @class = "text-danger" }) @* ilk parametre olan excludePropertyErrors mutlaka false gönderilmelidir. *@
+
+    <div class="row mb-3">
+
+        @*<label for="Name" class="col-sm-2 col-form-label">Movie Name</label>*@
+        @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 col-form-label" }) @* new { ... } C#'ta anonim yani bir class'ı olmayan tiptir, özellikleri istenildiği gibi yazarken oluşturulabilir. *@
+        @* MovieModel'deki Name özelliğinin DisplayName'ini kullanır. *@
+        @* LabelFor'da belirttiğimiz class burada CSS class'ıdır ancak class C#'da anahtar kelime olduğundan @ ile escape'lenerek yazılır. *@
+
+        <div class="col-sm-5">
+
+            @*<input type="text" class="form-control" id="Name" placeholder="Enter movie name..." name="Name" />*@ @* verinin sunucuya Name üzerinden gönderilebilmesi için mutlaka name özelliği belirtilmelidir. *@
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter movie name..." })
+
+            @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="row mb-3">
+
+        @*<label for="ProductionYear" class="col-sm-2 col-form-label">Production Year</label>*@
+        @Html.LabelFor(model => model.ProductionYear, new { @class = "col-sm-2 col-form-label" }) 
+
+        <div class="col-sm-5">
+
+            @*<input type="number" class="form-control" id="ProductionYear" placeholder="Enter production year..." min="1950" max="2050" name="ProductionYear" >*@ @* input gibi bazı HTML elemanlarının kapanış tag'leri /> yerine > olarak yazılabilir. *@
+            @Html.TextBoxFor(model => model.ProductionYear, new { @class = "form-control", placeholder = "Enter production year...", type = "number", min = "1950", max = "2050" })
+
+        </div>
+    </div>
+    <div class="row mb-3">
+
+        @*<label for="BoxOfficeReturnModel" class="col-sm-2 col-form-label">Box Office Return</label>*@
+        @Html.LabelFor(model => model.BoxOfficeReturnModel, new { @class = "col-sm-2 col-form-label" }) 
+
+        <div class="col-sm-5">
+
+            @*<input type="text" class="form-control" id="BoxOfficeReturnModel" placeholder="Enter box office return..." name="BoxOfficeReturnModel">*@
+            @Html.TextBoxFor(model => model.BoxOfficeReturnModel, new { @class = "form-control", placeholder = "Enter box office return..." })
+
+        </div>
+    </div>
+    <div class="row mb-3">
+
+        @*<label for="DirectorIds" class="col-sm-2 col-form-label">Directors</label>*@
+        @Html.LabelFor(model => model.DirectorIds, new { @class = "col-sm-2 col-form-label" }) 
+
+        <div class="col-sm-5">
+            
+            @*<select multiple id="DirectorIds" class="form-control" name="DirectorIds">
+                @foreach (SelectListItem directorItem in (ViewBag.Directors as MultiSelectList))
+                {
+                    <option value="@directorItem.Value">@directorItem.Text</option>
+                }
+            </select>*@
+            @Html.ListBoxFor(model => model.DirectorIds, ViewBag.Directors as MultiSelectList, new { @class = "form-control" })
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="offset-sm-2 col-sm-5">
+            <button type="submit" class="btn btn-dark">Save</button>
+            &nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-outline-dark">Reset</button>@* Sayfayı ilk gelen haline döndürür. *@
+            <br />
+            <br />
+            @Html.ActionLink("Back to Movie List", "Index") @* Create view'ını MoviesController'ından döndüğümüzden controller parametresini göndermeye gerek yok. *@
+        </div>
+    </div>
+
+@*</form>*@
+}
