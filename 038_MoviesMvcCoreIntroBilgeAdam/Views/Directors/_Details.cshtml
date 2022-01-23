@@ -1,0 +1,54 @@
+﻿@model DirectorModel
+
+<div>
+    <h4>Director</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class="col-2">
+
+            @*@Html.DisplayNameFor(model => model.Retired)*@
+            @Html.DisplayNameFor(model => model.RetiredModel)
+
+        </dt>
+        <dd class="col-10">
+
+            @*@Html.DisplayFor(model => model.Retired)*@
+            @Html.DisplayFor(model => model.RetiredModel)
+
+        </dd>
+
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.MoviesModel)
+        </dt>
+        <dd class="col-10">
+            @{
+                string movies = "";
+                if (Model.MoviesModel != null && Model.MoviesModel.Count > 0)
+                {
+                    foreach (var movie in Model.MoviesModel)
+                    {
+                        movies += movie.Name + "<br />";
+                    }
+
+                    // movies'in sonundaki <br />'yi temizliyoruz:
+                    //movies = movies.Substring(0, movies.Length - 6);
+                    movies = movies.Substring(0, movies.Length - "<br />".Length);
+
+                }
+            }
+            @Html.Raw(movies)
+        </dd>
+    </dl>
+</div>

@@ -13,7 +13,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
         private readonly IMovieService _movieService;
         private readonly IDirectorService _directorService; // Create ve Edit işlemlerinde tüm yönetmenlere ihtiyacımız olduğu için _directorService'ı da constructor injection üzerinden kullanıyoruz.
 
-        public MoviesController(IMovieService movieService, IDirectorService directorService)
+        public MoviesController(IMovieService movieService, IDirectorService directorService) // ihtiyacımız olan servisleri constructor injection yapıyoruz.
         {
             _movieService = movieService;
             _directorService = directorService;

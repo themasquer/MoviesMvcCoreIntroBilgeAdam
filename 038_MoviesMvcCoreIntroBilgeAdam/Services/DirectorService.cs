@@ -16,14 +16,21 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
 
         public IQueryable<DirectorModel> Query()
         {
-            return _db.Set<Director>().OrderBy(d => d.Name).ThenBy(d => d.Surname).Select(d => new DirectorModel()
+            return _db.Set<Director>().Include(d => d.MovieDirectors).OrderBy(d => d.Name).ThenBy(d => d.Surname).Select(d => new DirectorModel()
             {
                 Id = d.Id,
                 Name = d.Name,
                 Surname = d.Surname,
                 Retired = d.Retired,
 
-                FullName = d.Name + " " + d.Surname
+                FullName = d.Name + " " + d.Surname,
+                RetiredModel = d.Retired ? "Yes" : "No",
+                MovieCountModel = d.MovieDirectors.Count(), // her bir MovieDirector'ın bir Movie'si olduğundan MovieDirectors Count'ı kullanabiliriz.
+                MoviesModel = d.MovieDirectors.Select(md => new MovieModel() // yönetmenin filmlerinin adlarını göstereceğimizden sadece MovieModel Name ve Id özelliklerini set etmemiz yeterli.
+                {
+                    Id = md.Movie.Id,
+                    Name = md.Movie.Name
+                }).ToList()
             });
         }
     }

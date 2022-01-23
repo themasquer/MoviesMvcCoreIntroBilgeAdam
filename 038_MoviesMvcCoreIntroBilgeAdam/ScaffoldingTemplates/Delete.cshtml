@@ -73,6 +73,7 @@
     @:</dl>
     @:
     @:<form asp-action="@Model.ViewName">
+	@:@@Html.AntiForgeryToken()
         foreach (var property in Model.ModelMetadata.Properties)
         {
             if(property.IsPrimaryKey){

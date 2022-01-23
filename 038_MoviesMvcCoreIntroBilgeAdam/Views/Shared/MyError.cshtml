@@ -1,5 +1,7 @@
 ﻿@model string
 
+@* Projedeki tüm controller ve view'lar üzerinden paylaşılarak kullanılabilmesi için bu view ~/Views/Shared klasörü altında oluşturulmuştur. *@
+
 @{
     string message = string.IsNullOrWhiteSpace(Model) ? "An error occurred." : Model;
 }

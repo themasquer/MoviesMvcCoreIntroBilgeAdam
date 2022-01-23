@@ -31,17 +31,17 @@ HTML - CSS - Javascript örnekleri projede wwwroot -> HTML_Javascript_CSS_Intro 
 
 Proje geliştirme aşamaları:
 1) DatabaseController
-1.1) Seed Action
+1.1) Seed Action -> İlk verileri doldurma
 2) MoviesController
 2.1) Index Action -> HTML Helpers, ViewBag, ViewData
 2.2) Details Action 
 2.3) Create Action -> TempData, ModelState
 2.4) Edit Action -> View Scaffolding, Tag Helpers
 2.5) Delete Action
-3) DirectorsController
-3.1) Index Action
-3.2) Details Action
-3.3) Create Action
+3) DirectorsController -> Controller Scaffolding
+3.1) Index Action -> Model üzerinden kayıt sayısı yazdırma
+3.2) Details Action -> Bir model içerisinde başka bir model referansı kullanımı, partial views
+3.3) Create Action -> SelectListItem listesi kullanımı, DataAnnotation özelleştirmeleri, AntiForgeryToken
 3.4) Edit Action
 3.5) Delete Action
 4) ReviewsController
