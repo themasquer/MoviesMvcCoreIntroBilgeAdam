@@ -1,4 +1,4 @@
-﻿using _036_MoviesMvcBilgeAdam.Entities;
+﻿using _038_MoviesMvcCoreIntroBilgeAdam.Entities;
 using _038_MoviesMvcCoreIntroBilgeAdam.Models;
 using _038_MoviesMvcCoreIntroBilgeAdam.Services.Bases;
 using Microsoft.EntityFrameworkCore;

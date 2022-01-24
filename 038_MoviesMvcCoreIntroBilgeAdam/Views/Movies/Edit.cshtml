@@ -1,4 +1,4 @@
-﻿@*@model _036_MoviesMvcBilgeAdam.Entities.Movie*@
+﻿@*@model _038_MoviesMvcCoreIntroBilgeAdam.Entities.Movie*@
 @model MovieModel 
 @* Scaffolding'i entity üzerinden yapıyoruz, view'larda model kullanıyoruz. *@
 
@@ -22,14 +22,14 @@
             <div class="row mb-3">
                 <label asp-for="Name" class="col-2 col-form-label"></label>
 				<div class="col-5">
-					<input asp-for="Name" class="form-control" />@* type belirtilmezse tanımlanan model özelliğinin veri tipine göre input oluşturur. *@
+					<input asp-for="Name" class="form-control" placeholder="Enter movie name..." />@* type belirtilmezse tanımlanan model özelliğinin veri tipine göre input oluşturur. *@
 					<span asp-validation-for="Name" class="text-danger"></span>
 				</div>
             </div>
             <div class="row mb-3">
                 <label asp-for="ProductionYear" class="col-2 col-form-label"></label>
 				<div class="col-5">
-					<input asp-for="ProductionYear" class="form-control" />
+					<input asp-for="ProductionYear" class="form-control" placeholder="Enter production year..." />
 
 					@*<span asp-validation-for="ProductionYear" class="text-danger"></span>*@
                     @* Edit post action'ında ProductionYear için model üzerinden hiç bir validation yapmayacağımızdan yazmaya gerek yoktur. *@
@@ -39,7 +39,7 @@
             <div class="row mb-3">
                 <label asp-for="BoxOfficeReturnModel" class="col-2 col-form-label"></label>
 				<div class="col-5">
-					<input asp-for="BoxOfficeReturnModel" class="form-control" />
+					<input asp-for="BoxOfficeReturnModel" class="form-control" placeholder="Enter box office return..." />
 
 					@*<span asp-validation-for="BoxOfficeReturnModel" class="text-danger"></span>*@
                     @* Edit post action'ında BoxOfficeReturnModel için model üzerinden hiç bir validation yapmayacağımızdan yazmaya gerek yoktur. *@

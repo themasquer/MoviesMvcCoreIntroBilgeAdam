@@ -12,7 +12,7 @@ using _038_MoviesMvcCoreIntroBilgeAdam.Contexts;
 namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
 {
     [DbContext(typeof(MoviesContext))]
-    [Migration("20220120210242_v1")]
+    [Migration("20220124131658_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.Director", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Director", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
                     b.ToTable("Directors");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.Movie", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.MovieDirector", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.MovieDirector", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +97,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
                     b.ToTable("MovieDirectors");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.Review", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,15 +128,15 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.MovieDirector", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.MovieDirector", b =>
                 {
-                    b.HasOne("_036_MoviesMvcBilgeAdam.Entities.Director", "Director")
+                    b.HasOne("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Director", "Director")
                         .WithMany("MovieDirectors")
                         .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("_036_MoviesMvcBilgeAdam.Entities.Movie", "Movie")
+                    b.HasOne("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Movie", "Movie")
                         .WithMany("MovieDirectors")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -147,9 +147,9 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.Review", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Review", b =>
                 {
-                    b.HasOne("_036_MoviesMvcBilgeAdam.Entities.Movie", "Movie")
+                    b.HasOne("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Movie", "Movie")
                         .WithMany("Reviews")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -158,12 +158,12 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.Director", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Director", b =>
                 {
                     b.Navigation("MovieDirectors");
                 });
 
-            modelBuilder.Entity("_036_MoviesMvcBilgeAdam.Entities.Movie", b =>
+            modelBuilder.Entity("_038_MoviesMvcCoreIntroBilgeAdam.Entities.Movie", b =>
                 {
                     b.Navigation("MovieDirectors");
 

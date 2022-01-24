@@ -1,4 +1,4 @@
-﻿@*@model _036_MoviesMvcBilgeAdam.Entities.Director*@
+﻿@*@model _038_MoviesMvcCoreIntroBilgeAdam.Entities.Director*@
 @model DirectorModel
 
 @{
@@ -17,14 +17,14 @@
             <div class="row mb-3">
                 <label asp-for="Name" class="col-2 col-form-label"></label>
                 <div class="col-5">
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="Name" class="form-control" placeholder="Enter director name..." />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label asp-for="Surname" class="col-2 col-form-label"></label>
                 <div class="col-5">
-                    <input asp-for="Surname" class="form-control" />
+                    <input asp-for="Surname" class="form-control" placeholder="Enter director surname..." />
                     <span asp-validation-for="Surname" class="text-danger"></span>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     &nbsp;&nbsp;
                     <button type="reset" class="btn btn-outline-primary">Reset</button>
                     &nbsp;&nbsp;
-                    <a asp-action="Index">Back to List</a>
+                    <a asp-action="Index">Back to Director List</a>
                 </div>
             </div>
         </form>

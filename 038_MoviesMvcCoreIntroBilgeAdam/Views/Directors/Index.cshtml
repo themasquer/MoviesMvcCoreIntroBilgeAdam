@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<_036_MoviesMvcBilgeAdam.Entities.Director>*@
+﻿@*@model IEnumerable<_038_MoviesMvcCoreIntroBilgeAdam.Entities.Director>*@
 @model IEnumerable<DirectorModel>
 
 @{
@@ -36,6 +36,13 @@
     @* yukarıda set ettiğimiz count değişkeninin değerini burada kullanıyoruz. *@
     @count
 </p>
+
+@if (TempData["Message"] != null)
+{
+    <p class="bg-warning text-black">
+        @TempData["Message"]
+    </p>
+}
 
 <table class="table table-striped">
     <thead>

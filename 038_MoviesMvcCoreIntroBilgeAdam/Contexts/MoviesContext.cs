@@ -1,4 +1,4 @@
-﻿using _036_MoviesMvcBilgeAdam.Entities;
+﻿using _038_MoviesMvcCoreIntroBilgeAdam.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace _038_MoviesMvcCoreIntroBilgeAdam.Contexts

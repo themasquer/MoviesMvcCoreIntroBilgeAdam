@@ -1,4 +1,4 @@
-﻿namespace _036_MoviesMvcBilgeAdam.Entities
+﻿namespace _038_MoviesMvcCoreIntroBilgeAdam.Entities
 {
     public class MovieDirector
     {
