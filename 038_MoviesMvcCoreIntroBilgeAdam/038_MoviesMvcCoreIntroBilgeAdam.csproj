@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ScaffoldingTemplates\ControllerGenerator\**" />
+    <Compile Remove="ScaffoldingTemplates\ViewGenerator\**" />
+    <Content Remove="ScaffoldingTemplates\ControllerGenerator\**" />
+    <Content Remove="ScaffoldingTemplates\ViewGenerator\**" />
+    <EmbeddedResource Remove="ScaffoldingTemplates\ControllerGenerator\**" />
+    <EmbeddedResource Remove="ScaffoldingTemplates\ViewGenerator\**" />
+    <None Remove="ScaffoldingTemplates\ControllerGenerator\**" />
+    <None Remove="ScaffoldingTemplates\ViewGenerator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="ScaffoldingTemplates\Create.cshtml" />
     <Content Remove="ScaffoldingTemplates\Delete.cshtml" />
     <Content Remove="ScaffoldingTemplates\Details.cshtml" />
@@ -24,6 +35,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\plugins\bootstrap-datepicker\" />
   </ItemGroup>
 
 </Project>

@@ -29,7 +29,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Models
 
         
         [DisplayName("Director Name")]
-        public string? FullName { get; set; }
+        public string? FullNameModel { get; set; }
 
         [DisplayName("Retired")]
         public string? RetiredModel { get; set; }
@@ -41,6 +41,6 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Models
         public List<MovieModel>? MoviesModel { get; set; }
 
         [DisplayName("Movies")]
-        public List<int>? MovieIds { get; set; }
+        public List<int>? MovieIdsModel { get; set; }
     }
 }

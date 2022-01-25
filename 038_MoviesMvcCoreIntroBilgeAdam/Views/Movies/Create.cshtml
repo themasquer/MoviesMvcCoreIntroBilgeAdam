@@ -69,7 +69,7 @@
     <div class="row mb-3">
 
         @*<label for="DirectorIds" class="col-sm-2 col-form-label">Directors</label>*@
-        @Html.LabelFor(model => model.DirectorIds, new { @class = "col-sm-2 col-form-label" }) 
+        @Html.LabelFor(model => model.DirectorIdsModel, new { @class = "col-sm-2 col-form-label" }) 
 
         <div class="col-sm-5">
             
@@ -79,7 +79,7 @@
                     <option value="@directorItem.Value">@directorItem.Text</option>
                 }
             </select>*@
-            @Html.ListBoxFor(model => model.DirectorIds, ViewBag.Directors as MultiSelectList, new { @class = "form-control" })
+            @Html.ListBoxFor(model => model.DirectorIdsModel, ViewBag.Directors as MultiSelectList, new { @class = "form-control" })
 
         </div>
     </div>

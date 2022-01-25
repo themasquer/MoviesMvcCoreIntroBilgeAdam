@@ -1,0 +1,67 @@
+﻿@*@model _038_MoviesMvcCoreIntroBilgeAdam.Entities.Review*@
+@model ReviewModel
+
+@{
+    ViewData["Title"] = "Review Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-2">
+
+            @*@Html.DisplayNameFor(model => model.Date)*@
+            @Html.DisplayNameFor(model => model.DateModel)
+
+        </dt>
+        <dd class="col-10">
+
+            @*@Html.DisplayFor(model => model.Date)*@
+            @Html.DisplayFor(model => model.DateModel)
+
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Reviewer)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Reviewer)
+        </dd>
+        <dt class="col-2">
+
+            @*@Html.DisplayNameFor(model => model.Movie)*@
+            @Html.DisplayNameFor(model => model.MovieModel.Name)
+
+        </dt>
+        <dd class="col-10">
+
+            @*@Html.DisplayFor(model => model.Movie)*@
+            @Html.DisplayFor(model => model.MovieModel.Name)
+
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+        <dd class="col-10">
+
+            <span class="@Model.RatingCssClassModel">
+
+                @Html.DisplayFor(model => model.Rating)
+
+            </span>
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>&nbsp;|&nbsp;
+    <a asp-action="Index">Back to Review List</a>
+</div>

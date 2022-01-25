@@ -36,9 +36,9 @@
             </div>
 
             <div class="row mb-3">
-                <label asp-for="MovieIds" class="col-2 col-form-label"></label>
+                <label asp-for="MovieIdsModel" class="col-2 col-form-label"></label>
                 <div class="col-5">
-                    <select asp-for="MovieIds" asp-items="ViewBag.Movies" class="form-control" multiple></select>
+                    <select asp-for="MovieIdsModel" asp-items="ViewBag.Movies" class="form-control" multiple></select>
                 </div>
             </div>
 
@@ -55,3 +55,11 @@
     </div>
 </div>
 
+@* 
+    Bu view'de client side validation'ı (tarayıcı üzerinden validasyon) aktif etmek için eklendi. 
+    Ekstra bilgi için bakınız: ~/Views/Shared/_Layout.cshtml satır 55
+*@
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -12,7 +12,7 @@ using _038_MoviesMvcCoreIntroBilgeAdam.Contexts;
 namespace _038_MoviesMvcCoreIntroBilgeAdam.Migrations
 {
     [DbContext(typeof(MoviesContext))]
-    [Migration("20220124131658_v1")]
+    [Migration("20220125193633_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

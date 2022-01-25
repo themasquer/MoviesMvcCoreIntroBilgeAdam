@@ -35,18 +35,18 @@ Proje geliştirme aşamaları:
 2) MoviesController
 2.1) Index Action -> HTML Helpers, ViewBag, ViewData
 2.2) Details Action 
-2.3) Create Action -> TempData, ModelState, ActionVerbs (HttpGet, HttpPost) kullanımı
+2.3) Create Action -> MultiSelectList, TempData, ModelState, ActionVerbs (HttpGet, HttpPost) kullanımı, ~/Views/Shared altında hatalar için kendi oluşturduğumuz MyError.cshtml kullanımı
 2.4) Edit Action -> View Scaffolding, Tag Helpers
 2.5) Delete Action
 3) DirectorsController -> Controller Scaffolding
 3.1) Index Action -> Model üzerinden kayıt sayısı yazdırma
 3.2) Details Action -> Bir model içerisinde başka bir model referansı kullanımı, partial views
-3.3) Create Action -> SelectListItem listesi kullanımı, DataAnnotation özelleştirmeleri, AntiForgeryToken
+3.3) Create Action -> SelectListItem listesi kullanımı, DataAnnotation özelleştirmeleri, AntiForgeryToken, Client Side Validation, Section kullanımı
 3.4) Edit Action
 3.5) Delete Action -> ActionName kullanımı
 4) ReviewsController
-4.1) Index Action
+4.1) Index Action -> Model üzerinden tanımlanan css class'larının view'da kullanımı
 4.2) Details Action
-4.3) Create Action
+4.3) Create Action -> SelectList, bootstrap-datepicker js-css third party kütüphanesi kullanımı, radio button ve textarea kullanımı
 4.4) Edit Action
 4.5) Delete Action

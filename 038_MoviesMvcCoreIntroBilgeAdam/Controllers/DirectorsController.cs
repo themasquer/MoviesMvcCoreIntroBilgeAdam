@@ -1,18 +1,15 @@
 ﻿#nullable disable
-using _038_MoviesMvcCoreIntroBilgeAdam.Entities;
-using _038_MoviesMvcCoreIntroBilgeAdam.Contexts;
 using _038_MoviesMvcCoreIntroBilgeAdam.Models;
 using _038_MoviesMvcCoreIntroBilgeAdam.Services.Bases;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
 {
     public class DirectorsController : Controller
     {
         // DbContext üzerinden değil servisler üzerinden aksiyonları yazacağız.
-        private readonly MoviesContext _context;
+        //private readonly MoviesContext _context;
 
         //public DirectorsController(MoviesContext context)
         //{
@@ -119,7 +116,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
                 Value = m.Id.ToString(),
                 Text = m.Name
             }).ToList();
-            ViewData["Movies"] = new MultiSelectList(movieSelectListItems, "Value", "Text", director.MovieIds);
+            ViewData["Movies"] = new MultiSelectList(movieSelectListItems, "Value", "Text", director.MovieIdsModel);
             return View(director);
         }
 
@@ -149,7 +146,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
             {
                 return View("MyError", "Director not found!");
             }
-            ViewBag.Movies = new MultiSelectList(_movieService.Query().ToList(), "Id", "Name", model.MovieIds);
+            ViewBag.Movies = new MultiSelectList(_movieService.Query().ToList(), "Id", "Name", model.MovieIdsModel);
             return View(model);
         }
 
@@ -206,7 +203,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
                     ModelState.AddModelError("", "Director with the same name and surname exists!");
                 }
             }
-            ViewBag.Movies = new MultiSelectList(_movieService.Query().ToList(), "Id", "Name", director.MovieIds);
+            ViewBag.Movies = new MultiSelectList(_movieService.Query().ToList(), "Id", "Name", director.MovieIdsModel);
             return View(director);
         }
 

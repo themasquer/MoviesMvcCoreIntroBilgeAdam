@@ -34,6 +34,6 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Models
         public string? DirectorsModel { get; set; }
 
         [DisplayName("Directors")]
-        public List<int>? DirectorIds { get; set; }
+        public List<int>? DirectorIdsModel { get; set; }
     }
 }

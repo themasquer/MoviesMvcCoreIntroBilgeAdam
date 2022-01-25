@@ -94,7 +94,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
             }
 
             // eğer validasyondan geçemezse tüm yönetmenleri tekrar doldurup kullanıcının girmiş olduğu verileri model üzerinden view'a gönderiyoruz.
-            ViewBag.Directors = new MultiSelectList(_directorService.Query().ToList(), "Id", "FullName", model.DirectorIds);
+            ViewBag.Directors = new MultiSelectList(_directorService.Query().ToList(), "Id", "FullName", model.DirectorIdsModel);
             return View(model);
         }
 
@@ -113,7 +113,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
                 //return NotFound("Movie not found!"); // 404 status code
                 return View("MyError", "Movie not found!");
             }
-            ViewBag.Directors = new MultiSelectList(_directorService.Query().ToList(), "Id", "FullName", model.DirectorIds);
+            ViewBag.Directors = new MultiSelectList(_directorService.Query().ToList(), "Id", "FullName", model.DirectorIdsModel);
             return View(model);
         }
 
@@ -141,7 +141,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Controllers
                     ModelState.AddModelError("", "Movie with the same name exists!");
                 }
             }
-            ViewBag.Directors = new MultiSelectList(_directorService.Query().ToList(), "Id", "FullName", model.DirectorIds);
+            ViewBag.Directors = new MultiSelectList(_directorService.Query().ToList(), "Id", "FullName", model.DirectorIdsModel);
             return View(model);
         }
 

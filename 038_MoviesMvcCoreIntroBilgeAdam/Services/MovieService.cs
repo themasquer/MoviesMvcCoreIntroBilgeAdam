@@ -20,7 +20,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
 
         public IQueryable<MovieModel> Query()
         {
-            return _db.Set<Movie>().Include(m => m.Reviews).Include(m => m.MovieDirectors).ThenInclude(md => md.Director).OrderByDescending(m => m.ProductionYear).ThenBy(m => m.Name).Select(m => new MovieModel()
+            return _db.Set<Movie>().Include(m => m.Reviews).Include(m => m.MovieDirectors).ThenInclude(md => md.Director).OrderBy(m => m.Name).Select(m => new MovieModel()
             {
                 Id = m.Id,
                 Name = m.Name,
@@ -37,7 +37,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                 DirectorsModel = string.Join("<br />", m.MovieDirectors.Select(md => md.Director.Name + " " + md.Director.Surname)), // Movie ile ilişkili MovieDirectors ve MovieDirectors ile ilişkili Director'a ulaştığımız için yukarıda önce MovieDirectors'ı Include daha sonra Directors'ı ThenInclude etmemiz gerekli
 
                 //DirectorIds = m.MovieDirectors.Select(md => md.Director.Id).ToList()
-                DirectorIds = m.MovieDirectors.Select(md => md.DirectorId).ToList()
+                DirectorIdsModel = m.MovieDirectors.Select(md => md.DirectorId).ToList()
             });
         }
 
@@ -69,7 +69,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                     //    //MovieId = 0, // MovieDirectors zaten movie entity içerisinde olduğundan MovieId'ye 0 vermeye gerek yoktur.
                     //    DirectorId = dId
                     //}).ToList()
-                    MovieDirectors = model.DirectorIds?.Select(dId => new MovieDirector()
+                    MovieDirectors = model.DirectorIdsModel?.Select(dId => new MovieDirector()
                     {
                         //MovieId = 0, // MovieDirectors zaten movie entity içerisinde olduğundan MovieId'ye 0 vermeye gerek yoktur.
                         DirectorId = dId
@@ -132,7 +132,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                         return ResultStatus.StringToDoubleConversionFailed;
                     }
                 }
-                entity.MovieDirectors = model.DirectorIds?.Select(dId => new MovieDirector()
+                entity.MovieDirectors = model.DirectorIdsModel?.Select(dId => new MovieDirector()
                 {
                     DirectorId = dId
                 }).ToList();

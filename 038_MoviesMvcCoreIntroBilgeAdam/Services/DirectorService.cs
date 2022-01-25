@@ -23,7 +23,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                 Surname = d.Surname,
                 Retired = d.Retired,
 
-                FullName = d.Name + " " + d.Surname,
+                FullNameModel = d.Name + " " + d.Surname,
                 RetiredModel = d.Retired ? "Yes" : "No",
                 MovieCountModel = d.MovieDirectors.Count(), // her bir MovieDirector'ın bir Movie'si olduğundan MovieDirectors Count'ı kullanabiliriz.
                 MoviesModel = d.MovieDirectors.Select(md => new MovieModel() // yönetmenin filmlerinin adlarını göstereceğimizden sadece MovieModel Name ve Id özelliklerini set etmemiz yeterli.
@@ -32,7 +32,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                     Name = md.Movie.Name,
                     ProductionYear = md.Movie.ProductionYear
                 }).ToList(),
-                MovieIds = d.MovieDirectors.Select(md => md.MovieId).ToList()
+                MovieIdsModel = d.MovieDirectors.Select(md => md.MovieId).ToList()
             });
         }
 
@@ -49,7 +49,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                     Surname = model.Surname.Trim(),
                     Retired = model.Retired,
 
-                    MovieDirectors = model.MovieIds?.Select(mId => new MovieDirector()
+                    MovieDirectors = model.MovieIdsModel?.Select(mId => new MovieDirector()
                     {
                         MovieId = mId
                     }).ToList()
@@ -80,7 +80,7 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
                 entity.Surname = model.Surname.Trim();
                 entity.Retired = model.Retired;
 
-                entity.MovieDirectors = model.MovieIds?.Select(mId => new MovieDirector()
+                entity.MovieDirectors = model.MovieIdsModel?.Select(mId => new MovieDirector()
                 {
                     MovieId = mId
                 }).ToList();

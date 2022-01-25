@@ -28,6 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Directors" asp-action="Index">Director List</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Reviews" asp-action="Index">Review List</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -47,6 +50,34 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    @* 
+        Server tarafından controller action'larında model data annotation'larına göre server side validation 
+        yapılabileceği gibi client (tarayıcı) üzerinden aşağıdaki Javascript kütüphaneleri referans olarak eklenerek
+        Javascript kodları üzerinden client side validation yapılabilir. Böylece validasyon sorunlarında sunucuya istek 
+        boş yere gönderilip her seferinde _Layout HTML kodları ile birlikte View HTML kodlarını içeren 
+        yanıtın dönmesi engellenmiş ve validasyon sorunları sadece tarayıcı üzerinden Javascript ile gösterilmiş olur.
+    *@
+    @* 
+        Aşağıdaki script referansları ~/Views/Shared/_ValidationScriptsPartial.cshtml içerisinde olduğundan
+        script referanslarını eklemek yerine partial tag helper'ı kullanılabilir.
+    *@
+    @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
+    @*<partial name="_ValidationScriptsPartial" />*@ 
+    @* 
+        Bu şekilde tüm web uygulamasında client side validation aktif hale gelmiş olur. 
+        Ancak tüm web uygulamasında aktif etmek yerine sadece form içeren view'larda aktif etmek daha uygundur.
+        Bunun için de aşağıdaki RenderSectionAsync methodunun View'lerde section Scripts yazılan yerler için oluşturduğu, 
+        form içeren View'lerin en altına:
+        @section Scripts
+        {
+            <partial name="_ValidationScriptsPartial" />
+        }
+        eklenmesi yeterlidir. Örnek olarak Directors controller'ının Create ve Edit View'lerinde yapılmıştır.
+    *@
+
+    @await RenderSectionAsync("Scripts", required: false) 
+    @* Eğer required true gönderilirse bütün View'lerde Scripts adında bir section olmalıdır, olmazsa uygulama hata fırlatır. *@
 </body>
 </html>

@@ -23,6 +23,7 @@ builder.Services.AddScoped<DbContext, MoviesContext>(); // constructor injection
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IDirectorService, DirectorService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 #endregion
 
 var app = builder.Build();
@@ -36,7 +37,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(); // wwwroot klasörü altýndaki statik olan html, css, js, imaj vb. dosyalarý
 
 app.UseRouting();
 
