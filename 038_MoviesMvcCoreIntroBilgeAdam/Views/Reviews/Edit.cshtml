@@ -1,7 +1,8 @@
-﻿@model _038_MoviesMvcCoreIntroBilgeAdam.Entities.Review
+﻿@*@model _038_MoviesMvcCoreIntroBilgeAdam.Entities.Review*@
+@model ReviewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Review";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,55 +11,41 @@
 <hr />
 <div class="row">
     <div class="col-12">
-        <form asp-action="Edit">
-		@Html.AntiForgeryToken()
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="row mb-3">
-                <label asp-for="Content" class="col-2 col-form-label"></label>
-				<div class="col-5">
-					<input asp-for="Content" class="form-control" />
-					<span asp-validation-for="Content" class="text-danger"></span>
-				</div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="Rating" class="col-2 col-form-label"></label>
-				<div class="col-5">
-					<input asp-for="Rating" class="form-control" />
-					<span asp-validation-for="Rating" class="text-danger"></span>
-				</div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="Reviewer" class="col-2 col-form-label"></label>
-				<div class="col-5">
-					<input asp-for="Reviewer" class="form-control" />
-					<span asp-validation-for="Reviewer" class="text-danger"></span>
-				</div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="Date" class="col-2 col-form-label"></label>
-				<div class="col-5">
-					<input asp-for="Date" class="form-control" />
-					<span asp-validation-for="Date" class="text-danger"></span>
-				</div>
-            </div>
-            <div class="row mb-3">
-                <label asp-for="MovieId" class="col-2 col-form-label"></label>
-				<div class="col-5">
-					<select asp-for="MovieId" class="form-control" asp-items="ViewBag.MovieId"></select>
-					<span asp-validation-for="MovieId" class="text-danger"></span>
-				</div>
-            </div>
-            <div class="row mb-3">
-				<div class="offset-2 col-5">
-					<input type="submit" value="Save" class="btn btn-primary" />
-					&nbsp;&nbsp;
-                    <button type="reset" class="btn btn-outline-primary">Reset</button>
-					&nbsp;&nbsp;
-					<a asp-action="Index">Back to List</a>
-				</div>
-            </div>
-        </form>
+        
+        <partial name="_CreateEdit" model="Model" />
+
     </div>
 </div>
 
+@* 
+	https://uxsolutions.github.io/bootstrap-datepicker adresinden indirdiğimiz bootstrap-datepicker js-css kütüphanesini projemizde
+	~/wwwroot/plugins/bootstrap-datepicker klasörüne çıkarttık.
+	Takvimin sayfada kullanımında tarayıcının form verilerini otomatik olarak doldurması devre dışı bırakılmalı, 
+	bunun için form tag'ine autocomplete="off" html attribute'u eklenmeli.
+*@
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial" /> @* client side valitaion *@
+
+	<link rel="stylesheet" href="/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+	<script src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+	@* takvimi Türkçe kullanabilmek için eklenmeli. *@
+	@*<script src="/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>*@
+
+	<script>
+
+		//$(document).ready(function(){
+		$(function(){
+			$('.date').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                orientation: "bottom auto",
+                format: "mm/dd/yyyy"
+
+                //,language: "tr" // takvimi Türkçe kullanabilmek için eklenmeli.
+            });
+		});
+
+	</script>
+}

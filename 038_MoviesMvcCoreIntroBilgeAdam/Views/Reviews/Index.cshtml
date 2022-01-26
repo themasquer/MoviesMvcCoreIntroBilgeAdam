@@ -10,6 +10,40 @@
 <p>
     <a asp-action="Create">Create New Review</a>
 </p>
+
+<p class="bg-info text-dark">
+    @{
+        // count değişkenini burada set ediyoruz.
+        string count = "";
+        if (Model != null && Model.Count() > 0)
+        {
+            count = Model.Count().ToString();
+            if (Model.Count() == 1)
+            {
+                count += " review found.";
+            }
+            else
+            {
+                count += " reviews found.";
+            }
+        }
+        else
+        {
+            count = "No reviews found.";
+        }
+    }
+
+    @* yukarıda set ettiğimiz count değişkeninin değerini burada kullanıyoruz. *@
+    @count
+</p>
+
+@if (TempData["Message"] != null)
+{
+    <p class="bg-warning text-black">
+        @TempData["Message"]
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -83,9 +117,38 @@
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;|&nbsp;
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>&nbsp;|&nbsp;
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                    @* 
+                        Delete aksiyonunu link üzerinden çağırmak yerine AlertifyJS üzerinden konfirmasyon sonucunda OK denmesi durumunda 
+                        çağırabilmek için Delete link'inin en aşağıda yazdığımız deleteReview Javascript fonksiyonunu id göndererek
+                        çağırmasını sağlıyoruz.
+                    *@
+                    @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                    <a href="#" onclick="deleteReview(@item.Id);">Delete</a>
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@* Alertify JS kullanımı: *@
+@section Scripts {
+    <link rel="stylesheet" href="~/lib/AlertifyJS/css/alertify.min.css" />
+    <script src="~/lib/AlertifyJS/alertify.min.js"></script>
+
+    <script>
+        function deleteReview(id) {
+            alertify.confirm("Warning!",
+                "Are you sure do you want to delete this review?",
+                function () { // OK
+                    //alertify.success("Delete successful.");
+                    window.location.href = "/Reviews/Delete/" + id;
+                },
+                function () { // Cancel
+                    alertify.error("Delete canceled.");
+                }
+            );
+        }
+    </script>
+}

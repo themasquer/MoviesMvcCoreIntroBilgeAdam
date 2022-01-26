@@ -42,17 +42,61 @@ namespace _038_MoviesMvcCoreIntroBilgeAdam.Services
 
         public ResultStatus Add(ReviewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Review entity = new Review()
+                {
+                    Date = DateTime.Parse(model.DateModel, new CultureInfo("en-US")),
+                    Reviewer = model.Reviewer?.Trim(), // model.Reviewer null gelebileceği için null değilse değerini trim'leyerek set etmek null ise null set etmek için model.Reviewer? kullanıyoruz.
+                    MovieId = model.MovieId,
+                    Content = model.Content?.Trim(),
+                    Rating = model.Rating
+                };
+                _db.Set<Review>().Add(entity);
+                _db.SaveChanges();
+                return ResultStatus.Success;
+            }
+            catch 
+            {
+                return ResultStatus.Exception;
+            }
         }
 
         public ResultStatus Update(ReviewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Review entity = _db.Set<Review>().Find(model.Id);
+
+                entity.Date = DateTime.Parse(model.DateModel, new CultureInfo("en-US"));
+                entity.Reviewer = model.Reviewer?.Trim();
+                entity.MovieId = model.MovieId;
+                entity.Content = model.Content?.Trim();
+                entity.Rating = model.Rating;
+                
+                _db.Set<Review>().Update(entity);
+                _db.SaveChanges();
+                return ResultStatus.Success;
+            }
+            catch 
+            {
+                return ResultStatus.Exception;
+            }
         }
 
         public ResultStatus Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entity = _db.Set<Review>().Find(id);
+                _db.Set<Review>().Remove(entity);
+                _db.SaveChanges();
+                return ResultStatus.Success;
+            }
+            catch
+            {
+                return ResultStatus.Exception;
+            }
         }
     }
 }

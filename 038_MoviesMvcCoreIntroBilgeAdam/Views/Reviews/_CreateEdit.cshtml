@@ -1,0 +1,103 @@
+﻿@model ReviewModel
+
+@{
+	List<int> allRatings = new List<int>();
+	for (int r = 1; r <= 10; r++)
+	{
+		allRatings.Add(r);
+	}
+}
+
+@*<form asp-action="Create">*@
+@*<form asp-action="Create" autocomplete="off">*@
+@* Bu view hem Reviews/Create hem de Reviews/Edit aksiyonları tarafından kullanıldığı için iki aksiyona da post yapabilsin diye Html.BeginForm HTML helper'ı kullanıldı. *@
+@using (Html.BeginForm(FormMethod.Post, new { autocomplete = "off" }))
+{
+
+	<input asp-for="Id" type="hidden" /> @* Edit için formda gizli bir Id input'u olmalı. *@
+
+	@Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row mb-3">
+
+        @*<label asp-for="Date" class="col-2 col-form-label"></label>*@
+        <label asp-for="DateModel" class="col-2 col-form-label"></label>
+
+		<div class="col-5">
+
+			@*<input asp-for="Date" class="form-control" />*@
+			<input asp-for="DateModel" class="form-control date" placeholder="Enter date..." />@* bu textbox'ı en aşağıda bootstrap-datepicker'a dönüştüreceğimizden date class'ını tanımlıyoruz. *@
+
+			@*<span asp-validation-for="Date" class="text-danger"></span>*@
+			<span asp-validation-for="DateModel" class="text-danger"></span>
+
+		</div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="Reviewer" class="col-2 col-form-label"></label>
+		<div class="col-5">
+			<input asp-for="Reviewer" class="form-control" placeholder="Enter reviewer..." />
+			<span asp-validation-for="Reviewer" class="text-danger"></span>
+		</div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="MovieId" class="col-2 col-form-label"></label>
+		<div class="col-5">
+
+			@*<select asp-for="MovieId" class ="form-control" asp-items="ViewBag.MovieId"></select>*@
+			<select asp-for="MovieId" class ="form-control" asp-items="ViewBag.Movies">
+				<option value="">-- Select Movie --</option>
+			</select>
+
+		</div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="Rating" class="col-2 col-form-label"></label>
+		<div class="col-5">
+
+			@* Numeric Up Down input'u yerine radio button kullanımı: *@
+
+			@*<input asp-for="Rating" class="form-control" />
+			<span asp-validation-for="Rating" class="text-danger"></span>*@
+
+			<div style="padding-top: 7px;">
+				@foreach (int rating in allRatings)
+				{
+					@* Razor'da C# kodu içerisinde &nbsp; gibi bir yazı yazdırmak için başa @: eklenir veya yazı aşağıdaki gibi <text> tag'i içerisinde yazdırılır. *@
+							
+					if (rating == Model.Rating)
+					{
+						<input asp-for="Rating" type="radio" value="@rating" checked />@:&nbsp;@rating
+					}
+					else
+					{
+						<input asp-for="Rating" type="radio" value="@rating" />@:&nbsp;@rating
+					}
+					<text>&nbsp;&nbsp;&nbsp;&nbsp;</text>
+				}
+			</div>
+
+		</div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="Content" class="col-2 col-form-label"></label>
+		<div class="col-5">
+
+			@*<input asp-for="Content" class="form-control" />*@
+			<textarea asp-for="Content" class="form-control" placeholder="Enter content..."></textarea>
+
+			<span asp-validation-for="Content" class="text-danger"></span>
+		</div>
+    </div>
+    <div class="row mb-3">
+		<div class="offset-2 col-5">
+			<input type="submit" value="Save" class="btn btn-primary" />
+			&nbsp;&nbsp;
+            <button type="reset" class="btn btn-outline-primary">Reset</button>
+			&nbsp;&nbsp;
+			<a asp-action="Index">Back to Review List</a>
+		</div>
+    </div>
+
+@*</form>*@
+}

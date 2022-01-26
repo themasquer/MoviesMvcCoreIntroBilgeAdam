@@ -40,13 +40,13 @@ Proje geliştirme aşamaları:
 2.5) Delete Action
 3) DirectorsController -> Controller Scaffolding
 3.1) Index Action -> Model üzerinden kayıt sayısı yazdırma
-3.2) Details Action -> Bir model içerisinde başka bir model referansı kullanımı, partial views
+3.2) Details Action -> Bir model içerisinde başka bir model referansı kullanımı, _Details partial view
 3.3) Create Action -> SelectListItem listesi kullanımı, DataAnnotation özelleştirmeleri, AntiForgeryToken, Client Side Validation, Section kullanımı
 3.4) Edit Action
 3.5) Delete Action -> ActionName kullanımı
 4) ReviewsController
-4.1) Index Action -> Model üzerinden tanımlanan css class'larının view'da kullanımı
+4.1) Index Action -> Model üzerinden tanımlanan css class'larının view'da kullanımı, Alertify js-css third party kütüphanesi kullanımı
 4.2) Details Action
-4.3) Create Action -> SelectList, bootstrap-datepicker js-css third party kütüphanesi kullanımı, radio button ve textarea kullanımı
+4.3) Create Action -> SelectList, bootstrap-datepicker js-css third party kütüphanesi kullanımı, radio button ve textarea kullanımı, _CreateEdit partial view
 4.4) Edit Action
-4.5) Delete Action
+4.5) Delete Action -> Alertify js-css third party kütüphanesi kullanımı
