@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Tic Tac Toe</title>
+    <style>
+        select {
+            width: 100%;
+        }
+        #durum {
+            font-weight: bold;
+        }
+        .ticTacToeButon {
+            width: 80px;
+            height: 80px;
+            font-family: 'Comic Sans MS';
+            font-size: 28px;
+        }
+        .ticTacToeButon:hover {
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td style="width: 80px;">
+                    <b>Oyuncu 1</b>
+                </td>
+                <td colspan="2">
+                    <select id="oyuncu1" onchange="oyuncuDegistir();">
+                        <option value="x" selected>X</option>
+                        <option value="o">O</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Oyuncu 2</b>
+                </td>
+                <td colspan="2">
+                    <select id="oyuncu2" disabled>
+                        <option value="x">X</option>
+                        <option value="o" selected>O</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button id="oyunabasla" style="width: 100%;" onclick="oyunaBasla();">Oyuna Başla</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <b>Durum: </b><label id="durum"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="b0" class="ticTacToeButon" onclick="oyna(0);" disabled></button>
+                </td>
+                <td>
+                    <button id="b1" class="ticTacToeButon" onclick="oyna(1);" disabled></button>
+                </td>
+                <td>
+                    <button id="b2" class="ticTacToeButon" onclick="oyna(2);" disabled></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="b3" class="ticTacToeButon" onclick="oyna(3);" disabled></button>
+                </td>
+                <td>
+                    <button id="b4" class="ticTacToeButon" onclick="oyna(4);" disabled></button>
+                </td>
+                <td>
+                    <button id="b5" class="ticTacToeButon" onclick="oyna(5);" disabled></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="b6" class="ticTacToeButon" onclick="oyna(6);" disabled></button>
+                </td>
+                <td>
+                    <button id="b7" class="ticTacToeButon" onclick="oyna(7);" disabled></button>
+                </td>
+                <td>
+                    <button id="b8" class="ticTacToeButon" onclick="oyna(8);" disabled></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var oyuncu1 = document.getElementById("oyuncu1");
+        var oyuncu2 = document.getElementById("oyuncu2");
+        let ticTacToe;
+        function oyuncuDegistir() {
+            if (oyuncu1.value == "x") {
+                oyuncu2.value = "o";
+            } else {
+                oyuncu2.value = "x";
+            }
+        }
+        function oyunaBasla() {
+            ticTacToe = new TicTacToe(oyuncu1, oyuncu2);
+            ticTacToe.yeniOyun();
+        }
+        function oyna(butonIndexi) {
+            ticTacToe.ticTacToeOyna(butonIndexi);
+        }
+
+        class TicTacToe {
+            constructor(oyuncu1, oyuncu2) {
+                this._oyuncu1 = oyuncu1;
+                this._oyuncu2 = oyuncu2;
+                this._oyunabasla = document.getElementById("oyunabasla");
+                this._durum = document.getElementById("durum");
+                this._ticTacToeButon = null;
+                this._oynayanNo = 0;
+                this._butonlar = [];
+            }
+            yeniOyun(oyunaBasla = true) {
+                for (var i = 0; i < 9; i++) {
+                    this._ticTacToeButon = document.getElementById("b" + i);
+                    if (oyunaBasla) {
+                        this._ticTacToeButon.disabled = false;
+                        this._butonlar[i] = "";
+                        this._ticTacToeButon.innerText = "";
+                    } else {
+                        this._ticTacToeButon.disabled = true;
+                    }
+                }
+                if (oyunaBasla) {
+                    this._oyuncu1.disabled = true;
+                    this._oyunabasla.disabled = true;
+                    this._oynayanNo = 1;
+                    this._durum.innerHTML = "Sıra Oyuncu 1'de";
+                    this._durum.style.color = "blue";
+                }
+            }
+            ticTacToeOyna(ticTacToeButonIndexi) {
+                if (this._butonlar[ticTacToeButonIndexi] != "") {
+                    this._durum.innerHTML = "Yanlış hamle " + (this._oynayanNo == 1 ? "Oyuncu 1" : "Oyuncu 2") + "!";
+                    this._durum.style.color = "red";
+                    return;
+                }
+                var ticTacToeButon = document.getElementById("b" + ticTacToeButonIndexi);
+                if (this._oynayanNo == 1) {
+                    this._butonlar[ticTacToeButonIndexi] = oyuncu1.value;
+                    ticTacToeButon.innerText = oyuncu1.value;
+                    if (this.kazandiMi(oyuncu1.value)) {
+                        this._durum.innerHTML = "Oyuncu 1 kazandı.";
+                        this._durum.style.color = "green";
+                        this.yeniOyun(false);
+                        this._oyuncu1.disabled = false;
+                        this._oyunabasla.disabled = false;
+                    } else {
+                        if (this.oyunBittiMi()) {
+                            this._durum.innerHTML = "Kazanan oyuncu yok.";
+                            this.yeniOyun(false);
+                            this._oyuncu1.disabled = false;
+                            this._oyunabasla.disabled = false;
+                        } else {
+                            this._oynayanNo = 2;
+                            this._durum.innerHTML = "Sıra Oyuncu 2'de";
+                        }
+                        this._durum.style.color = "blue";
+                    }
+                } else {
+                    this._butonlar[ticTacToeButonIndexi] = oyuncu2.value;
+                    ticTacToeButon.innerText = oyuncu2.value;
+                    if (this.kazandiMi(oyuncu2.value)) {
+                        this._durum.innerHTML = "Oyuncu 2 kazandı.";
+                        this._durum.style.color = "green";
+                        this.yeniOyun(false);
+                        this._oyuncu1.disabled = false;
+                        this._oyunabasla.disabled = false;
+                    } else {
+                        if (this.oyunBittiMi()) {
+                            this._durum.innerHTML = "Kazanan oyuncu yok.";
+                            this.yeniOyun(false);
+                            this._oyuncu1.disabled = false;
+                            this._oyunabasla.disabled = false;
+                        } else {
+                            this._oynayanNo = 1;
+                            this._durum.innerHTML = "Sıra Oyuncu 1'de";
+                        }
+                        this._durum.style.color = "blue";
+                    }
+                }
+            }
+            oyunBittiMi() {
+                var sonuc = true;
+                for (var i = 0; i < this._butonlar.length; i++) {
+                    if (this._butonlar[i] == "") {
+                        sonuc = false;
+                        break;
+                    }
+                }
+                return sonuc;
+            }
+            kazandiMi(oyuncuDegeri) {
+                var sonuc = false;
+                if ((this._butonlar[0] == oyuncuDegeri && this._butonlar[1] == oyuncuDegeri && this._butonlar[2] == oyuncuDegeri) // 1. sıra yatay
+                    || (this._butonlar[3] == oyuncuDegeri && this._butonlar[4] == oyuncuDegeri && this._butonlar[5] == oyuncuDegeri) // 2. sıra yatay
+                    || (this._butonlar[6] == oyuncuDegeri && this._butonlar[7] == oyuncuDegeri && this._butonlar[8] == oyuncuDegeri) // 3. sıra yatay
+                    || (this._butonlar[0] == oyuncuDegeri && this._butonlar[3] == oyuncuDegeri && this._butonlar[6] == oyuncuDegeri) // 1. sütun dikey
+                    || (this._butonlar[1] == oyuncuDegeri && this._butonlar[4] == oyuncuDegeri && this._butonlar[7] == oyuncuDegeri) // 2. sütun dikey
+                    || (this._butonlar[2] == oyuncuDegeri && this._butonlar[5] == oyuncuDegeri && this._butonlar[8] == oyuncuDegeri) // 3. sütun dikey
+                    || (this._butonlar[0] == oyuncuDegeri && this._butonlar[4] == oyuncuDegeri && this._butonlar[8] == oyuncuDegeri) // 1. çapraz
+                    || (this._butonlar[2] == oyuncuDegeri && this._butonlar[4] == oyuncuDegeri && this._butonlar[6] == oyuncuDegeri)) { // 2. çapraz
+                    sonuc = true;
+                }
+                return sonuc;
+            }
+        }
+    </script>
+</body>
+</html>
