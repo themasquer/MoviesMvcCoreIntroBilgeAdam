@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery vs. Javascript</title>
+    <script>
+        // Javascript
+        function kontrolEt() {
+            var duzKelime = document.getElementById("kelime").value;
+            if (duzKelime.length >= 2) {
+                var tersKelime = "";
+                for (var i = duzKelime.length - 1; i >= 0; i--) {
+                    tersKelime += duzKelime[i];
+                }
+                if (duzKelime == tersKelime) {
+                    document.getElementById("sonuc").innerText = "Girdiğiniz kelime palindromdur.";
+                } else {
+                    document.getElementById("sonuc").innerText = "Girdiğiniz kelime palindrom değildir.";
+                }
+            } else {
+                document.getElementById("sonuc").innerHTML = "<b>Kelime en az iki harf girilmelidir!</b>";
+            }
+        }
+    </script>
+
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        // jQuery
+        //$(document).ready(function () {
+        $(function () {
+            $("#control").click(function () {
+                var duzKelime = $("#word").val();
+                if (duzKelime.length >= 2) {
+                    var tersKelime = "";
+                    for (var i = duzKelime.length - 1; i >= 0; i--) {
+                        tersKelime += duzKelime[i];
+                    }
+                    if (duzKelime == tersKelime) {
+                        $(".result").text("Girdiğiniz kelime palindromdur.");
+                    } else {
+                        $(".result").text("Girdiğiniz kelime palindrom değildir.")
+                    }
+                } else {
+                    $(".result").html("<b>Kelime en az iki harf girilmelidir!</b>");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--
+    Palindrom:
+    Eğer bir kelimenin düz okunuşu ile ters okunuşu birbirinin aynı ise palindromdur, değilse palindrom değildir.
+    Örneğin 'ana' kelimesi bir palindrom iken 'baba' kelimesi bir palindrom değildir.
+    Basit bir palindrom kontrol konsol uygulaması yazınız:
+    1) Kullanıcının yaptığı giriş en az iki karakter olmalıdır.
+    2) Kullanıcı sadece harf girecek diye bir zorunluluk yoktur.
+    3) Eğer kullanıcının girdiği kelime palindrom ise ekrana 'Girdiğiniz kelime palindromdur.', değilse 'Girdiğiniz kelime palindrom değildir.' yazılır.
+    -->
+
+    <h1>Palindrom (Javascript)</h1>
+    <span>Kelime</span>&nbsp;
+    <input type="text" id="kelime" />
+    <br />
+    <br />
+    <button onclick="kontrolEt();">Kontrol Et</button>
+    <br />
+    <br />
+    <span id="sonuc" style="color:red;"></span>
+
+    <hr />
+
+    <h1>Palindrom (jQuery)</h1>
+    <span>Kelime</span>&nbsp;
+    <input type="text" id="word" />
+    <br />
+    <br />
+    <button id="control">Kontrol Et</button>
+    <br />
+    <br />
+    <span class="result" style="color:red;"></span>
+</body>
+</html>
